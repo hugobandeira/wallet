@@ -1,5 +1,9 @@
 FROM php:7.4-fpm-alpine
-RUN apk add --no-cache shadow openssl bash mysql-client nginx nano
+RUN apk add --no-cache shadow openssl bash mysql-client nginx autoconf nano
+
+
+# Need to add a default value to use it through the command line
+ARG UID='1000'
 
 RUN touch /home/www-data/.bashrc | echo "PS1='\w\$ '" >> /home/www-data/.bashrc
 
@@ -19,7 +23,7 @@ COPY . .
 
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www/
-#RUN chmod -R 775 /var/www/storage
+RUN chmod -R 775 /var/www/storage
 
 USER www-data
 EXPOSE 80
