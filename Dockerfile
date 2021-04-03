@@ -1,8 +1,7 @@
 FROM php:7.4-fpm-alpine
 RUN apk add --no-cache shadow openssl bash mysql-client nginx nano
-#COPY .docker/supervisord.conf /etc/supervisord.conf
-#RUN apk add --no-cache shadow openssl bash mysql-client alpine-sdk autoconf nano nginx openrc
-#RUN apk add --no-cache shadow openssl bash mysql-client alpine-sdk autoconf nano nginx openrc supervisor sqlite
+
+RUN touch /home/www-data/.bashrc | echo "PS1='\w\$ '" >> /home/www-data/.bashrc
 
 RUN apk add --no-cache $PHPIZE_DEPS
 RUN docker-php-ext-install pdo pdo_mysql bcmath
