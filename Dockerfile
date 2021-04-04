@@ -1,6 +1,5 @@
 FROM php:7.4-fpm-alpine
-RUN apk add --no-cache shadow openssl bash mysql-client nginx autoconf nano
-
+RUN apk add --no-cache shadow openssl bash mysql-client nginx autoconf nano openrc alpine-sdk
 
 # Need to add a default value to use it through the command line
 ARG UID='1000'
