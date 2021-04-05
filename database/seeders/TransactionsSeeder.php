@@ -27,7 +27,7 @@ class TransactionsSeeder extends Seeder
                 Transactions::factory()
                     ->count(3)
                     ->state(
-                        function (User $user) {
+                        function ($attributes, User $user) {
                             return ['payer_id' => $user->id, 'payee_id' => $user->id];
                         }
                     ),
