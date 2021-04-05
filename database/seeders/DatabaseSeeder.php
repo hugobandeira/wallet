@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Seeder;
 
 /**
@@ -23,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 TransactionsSeeder::class,
+                WalletSeeder::class,
             ]
         );
     }

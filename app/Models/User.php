@@ -73,4 +73,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transactions::class, 'payee_id', 'id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function wallet(): HasMany
+    {
+        return $this->hasMany(Wallet::class, 'user_id', 'id');
+    }
 }

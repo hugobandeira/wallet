@@ -5,44 +5,51 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\Traits\Uuid;
-use App\Models\Transactions;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tests\TestCase;
 
 /**
- * Class TransactionTest
+ * Class WalletTest
  *
  * @package Tests\Unit\Models
  */
-class TransactionTest extends TestCase
+class WalletTest extends TestCase
 {
     /**
-     * @var Transactions
+     * @var Wallet
      */
-    private $transactionModel;
+    private $walletModel;
 
+    /**
+     *
+     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->transactionModel = new Transactions();
+        $this->walletModel = new Wallet();
     }
 
+    /**
+     *
+     */
     public function testFillable(): void
     {
         $fillable = [
-            'payer_id',
-            'payee_id',
-            'status',
-            'value',
+            'amount',
+            'user_id',
         ];
 
-        self::assertEquals($fillable, $this->transactionModel->getFillable());
+        self::assertEquals($fillable, $this->walletModel->getFillable());
     }
 
+    /**
+     *
+     */
     public function testIncrementing(): void
     {
-        self::assertFalse($this->transactionModel->getIncrementing());
+        self::assertFalse($this->walletModel->getIncrementing());
     }
 
     public function testCats(): void
@@ -51,7 +58,7 @@ class TransactionTest extends TestCase
             'id' => 'string'
         ];
 
-        self::assertEquals($cats, $this->transactionModel->getCasts());
+        self::assertEquals($cats, $this->walletModel->getCasts());
     }
 
     public function testShouldBeReceiveTraits(): void
@@ -61,6 +68,6 @@ class TransactionTest extends TestCase
             Uuid::class,
         ];
 
-        self::assertEquals($traits, array_keys(class_uses($this->transactionModel)));
+        self::assertEquals($traits, array_keys(class_uses($this->walletModel)));
     }
 }
