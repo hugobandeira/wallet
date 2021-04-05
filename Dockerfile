@@ -6,7 +6,10 @@ ARG UID='1000'
 
 RUN touch /home/www-data/.bashrc | echo "PS1='\w\$ '" >> /home/www-data/.bashrc
 
-RUN apk add --no-cache $PHPIZE_DEPS
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug-2.9.6 \
+    && docker-php-ext-enable xdebug
+
 RUN docker-php-ext-install pdo pdo_mysql bcmath
 RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
