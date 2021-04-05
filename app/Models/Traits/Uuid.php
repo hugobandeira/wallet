@@ -22,7 +22,7 @@ trait Uuid
 
         static::creating(
             static function ($obj) {
-                $obj->id = UuidAlias::uuid4();
+                $obj->id = UuidAlias::uuid4()->toString();
             }
         );
     }
