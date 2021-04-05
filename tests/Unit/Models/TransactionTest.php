@@ -34,6 +34,7 @@ class TransactionTest extends TestCase
             'payer_id',
             'payee_id',
             'status',
+            'value',
         ];
 
         self::assertEquals($fillable, $this->transactionModel->getFillable());
