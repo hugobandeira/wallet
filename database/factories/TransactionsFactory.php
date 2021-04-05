@@ -35,7 +35,7 @@ class TransactionsFactory extends Factory
         return [
             'payer_id' => $this->faker->randomElement($users),
             'payee_id' => $this->faker->randomElement($users),
-            'value' => $this->faker->randomFloat(),
+            'value' => $this->faker->randomFloat(2, 1),
         ];
     }
 }

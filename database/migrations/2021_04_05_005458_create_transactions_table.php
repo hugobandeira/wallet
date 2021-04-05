@@ -26,7 +26,7 @@ class CreateTransactionsTable extends Migration
                 $table->uuid('payee_id');
                 $table->enum('status', ['DONE', 'IN_PROGRESS', 'PENDING', 'ERROR'])
                     ->default('PENDING');
-                $table->double('value');
+                $table->double('value', 12, 2);
                 $table->timestamps();
 
                 $table->foreign('payer_id')->references('id')->on('users');
