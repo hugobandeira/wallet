@@ -27,7 +27,6 @@ Route::group(
 Route::group(
     ['prefix' => 'transaction'],
     function () {
-        Route::get('', [TransactionsController::class, 'index']);
         Route::post('', [TransactionsController::class, 'receiveTransaction']);
     }
 );
