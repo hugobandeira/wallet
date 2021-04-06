@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\UserRepositoryInterface;
 
 /**
  * Class UsersController
@@ -15,10 +14,20 @@ use Illuminate\Database\Eloquent\Collection;
 class UsersController extends Controller
 {
     /**
-     * @return User[]|Collection
+     * @var UserRepositoryInterface
      */
-    public function allUsers()
+    private $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        return User::all()->append('balance');
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * @return array
+     */
+    public function allUsers(): array
+    {
+        return $this->userRepository->all();
     }
 }
