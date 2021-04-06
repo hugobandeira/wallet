@@ -34,8 +34,8 @@ class TransactionSendRequestTest extends TestCase
     public function testRules(): void
     {
         $expected = [
-            'payer_id' => 'required',
-            'payee_id' => 'required',
+            'payer_id' => 'required|exists:users,id',
+            'payee_id' => 'required|exists:users,id',
             'value' => 'required|numeric|min:0.1',
         ];
         self::assertEquals($expected, $this->transactionRequest->rules());
