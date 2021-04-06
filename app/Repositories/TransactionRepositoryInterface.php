@@ -13,12 +13,6 @@ interface TransactionRepositoryInterface
 {
     /**
      * @param  string  $id
-     * @return array
-     */
-    public function get(string $id): array;
-
-    /**
-     * @param  string  $id
      * @param  array  $params
      * @return bool
      */

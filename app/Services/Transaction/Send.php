@@ -104,7 +104,7 @@ class Send implements Transaction
         }
         $user = $this->userRepository->get($params['payer_id']);
 
-        if ($user->type_person === 'J') {
+        if ($user['type_person'] === 'J') {
             throw new TransactionException('Type of person not allowed', 401);
         }
 

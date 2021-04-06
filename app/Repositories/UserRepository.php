@@ -14,8 +14,12 @@ use App\Models\User;
  */
 class UserRepository implements UserRepositoryInterface
 {
-    public function get(string $userId)
+    /**
+     * @param  string  $userId
+     * @return array
+     */
+    public function get(string $userId): array
     {
-        return User::find($userId);
+        return User::find($userId)->toArray();
     }
 }

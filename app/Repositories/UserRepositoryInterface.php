@@ -5,7 +5,6 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-
 /**
  * Interface UserRepositoryInterface
  *
@@ -15,7 +14,7 @@ interface UserRepositoryInterface
 {
     /**
      * @param  string  $userId
-     * @return mixed
+     * @return array
      */
-    public function get(string $userId);
+    public function get(string $userId): array;
 }

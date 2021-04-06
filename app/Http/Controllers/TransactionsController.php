@@ -24,6 +24,11 @@ class TransactionsController extends Controller
      */
     private $transactionFactory;
 
+    /**
+     * TransactionsController constructor.
+     *
+     * @param  TransactionFactory  $transactionFactory
+     */
     public function __construct(TransactionFactory $transactionFactory)
     {
         $this->transactionFactory = $transactionFactory;
