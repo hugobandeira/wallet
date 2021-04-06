@@ -33,7 +33,7 @@ class UserRepositoryTest extends TestCase
     /**
      * @dataProvider dataProviderUser
      */
-    public function testShouldBeCreateTransactionSuccess($typePerson): void
+    public function testShouldBeGetUser($typePerson): void
     {
         $user = User::factory()->count(1)->create(
             [
@@ -53,6 +53,14 @@ class UserRepositoryTest extends TestCase
                 'cpf/cnpj' => $user->first()->{'cpf/cnpj'},
             ]
         );
+    }
+
+
+    public function testShouldBeAllUsers(): void
+    {
+        User::factory()->create();
+        $result = $this->userRepository->all();
+        self::assertCount(1, $result);
     }
 
     /**

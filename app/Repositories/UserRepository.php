@@ -22,4 +22,12 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::find($userId)->toArray();
     }
+
+    /**
+     * @return array
+     */
+    public function all(): array
+    {
+        return User::all()->append('balance')->toArray();
+    }
 }

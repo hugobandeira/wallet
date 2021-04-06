@@ -13,6 +13,11 @@ namespace App\Repositories;
 interface UserRepositoryInterface
 {
     /**
+     * @return array
+     */
+    public function all(): array;
+
+    /**
      * @param  string  $userId
      * @return array
      */
