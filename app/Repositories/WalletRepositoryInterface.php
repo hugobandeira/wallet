@@ -7,7 +7,7 @@ namespace App\Repositories;
 
 
 /**
- * Interface WallerRespositoryInterface
+ * Interface WalletRepositoryInterface
  *
  * @package App\Repositories
  */

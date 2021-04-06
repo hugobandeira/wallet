@@ -72,7 +72,6 @@ class TransactionFactory
                     $this->userRepository,
                     $this->authorizationService
                 );
-                break;
             default:
                 throw new Exception('Method not found');
         }

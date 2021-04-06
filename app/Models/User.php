@@ -21,6 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use Uuid;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -81,5 +82,13 @@ class User extends Authenticatable
     public function wallet(): HasMany
     {
         return $this->hasMany(Wallet::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return float
+     */
+    public function getBalanceAttribute(): float
+    {
+        return $this->wallet()->sum('amount');
     }
 }
