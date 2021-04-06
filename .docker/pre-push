@@ -1,0 +1,13 @@
+#!/bin/sh
+reset=$(tput sgr0)
+red=$(tput bold && tput setaf 1)
+green=$(tput bold && tput setaf 2)
+blue=$(tput bold && tput setaf 4)
+
+printf "\n${blue}--------Run Unit Tests-------\n${reset}"
+if make test ; then
+    echo "${green}Unit test has succeeded${reset}"
+else
+    echo "${red}Unit test has some error, please check before push to stash${reset}"
+    exit 1
+fi
