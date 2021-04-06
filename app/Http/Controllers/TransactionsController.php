@@ -6,14 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\TransactionException;
 use App\Http\Requests\TransactionSendRequest;
-use App\Repositories\WalletRepositoryInterface;
 use App\Services\Transaction\Send;
 use App\Services\Transaction\TransactionFactory;
-use App\Services\Transaction\TransactionFactoryInterface1;
-use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Throwable;
 
 /**
  * Class TransactionsController
@@ -58,9 +54,13 @@ class TransactionsController extends Controller
                     ],
                     $exception->getCode()
                 );
-        } catch (\Throwable $exception) {
-            dd($exception->getMessage(), 'qui');
-            return response()->json([]);
+        } catch (Throwable $exception) {
+            return response()->json(
+                [
+                    'message' => 'transaction failed, try again',
+                ],
+                $exception->getCode()
+            );
         }
     }
 }
