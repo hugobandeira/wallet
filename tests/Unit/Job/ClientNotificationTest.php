@@ -21,7 +21,8 @@ class ClientNotificationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->notification = $this->mock(NotificationServiceInterface::class)->shouldReceive('isNotified');
+        $this->notification = $this->mock(NotificationServiceInterface::class)
+            ->shouldReceive('isNotified');
     }
 
     public function testShouldNotificationIsSuccess(): void
@@ -35,6 +36,15 @@ class ClientNotificationTest extends TestCase
     {
         $this->notification->andReturnFalse()
             ->once();
+        dispatch(new ClientNotification([]));
+    }
+
+
+    public function testShouldException(): void
+    {
+        $this->notification->andReturnFalse()
+            ->once()
+            ->andReturn('123');
         dispatch(new ClientNotification([]));
     }
 }
