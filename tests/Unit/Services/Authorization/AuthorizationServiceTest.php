@@ -36,7 +36,7 @@ class AuthorizationServiceTest extends TestCase
      * @param $body
      * @param $expected
      */
-    public function testResponseAuthorization($statusCode, $body, $expected)
+    public function testResponseAuthorization($statusCode, $body, $expected): void
     {
         Http::fake(
             [

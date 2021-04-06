@@ -38,10 +38,6 @@ class NotificationService implements NotificationServiceInterface
             throw new Exception("Retry notification");
         }
 
-        if ($response->json()['message'] !== 'Enviado') {
-            throw new Exception("Retry notification");
-        }
-
-        return true;
+        return ($response->json()['message'] === 'Enviado');
     }
 }
