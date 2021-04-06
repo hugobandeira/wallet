@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Transaction;
 
 use App\Exceptions\TransactionException;
+use App\Jobs\ClientNotification;
 use App\Repositories\TransactionRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\WalletRepositoryInterface;
@@ -83,6 +84,8 @@ class Send implements Transaction
                 'status' => 'DONE',
             ]
         );
+
+        dispatch(new ClientNotification($params));
 
         return ["message" => "transfer is success"];
     }
