@@ -38,6 +38,7 @@ class UserTest extends TestCase
             'email',
             'cpf/cnpj',
             'password',
+            'type_person',
         ];
 
         self::assertEquals($fillable, $this->userModel->getFillable());

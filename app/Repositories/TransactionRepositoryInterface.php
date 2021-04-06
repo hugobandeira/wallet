@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Repositories;
+
+/**
+ * Interface TransactionRepositoryInterface
+ *
+ * @package App\Repositories
+ */
+interface TransactionRepositoryInterface
+{
+    /**
+     * @param  string  $id
+     * @return array
+     */
+    public function get(string $id): array;
+
+    /**
+     * @param  string  $id
+     * @param  array  $params
+     * @return bool
+     */
+    public function update(string $id, array $params): bool;
+}
