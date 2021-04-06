@@ -10,6 +10,7 @@ use App\Services\Transaction\Send;
 use App\Services\Transaction\TransactionFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
@@ -57,6 +58,7 @@ class TransactionsController extends Controller
                     $exception->getCode()
                 );
         } catch (Throwable $exception) {
+            Log::error($exception->getMessage(), $exception->getTrace());
             DB::rollBack();
             return response()->json(
                 [
