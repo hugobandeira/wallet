@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-                TransactionsSeeder::class,
                 WalletSeeder::class,
             ]
         );
