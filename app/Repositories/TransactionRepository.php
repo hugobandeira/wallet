@@ -34,8 +34,25 @@ class TransactionRepository implements TransactionRepositoryInterface
         $transaction = Transactions::find($id);
         return $transaction->update(
             [
-                $params
+                'status' => $params['status']
             ]
         );
+    }
+
+    /**
+     * @param  string  $payer
+     * @param  string  $payee
+     * @param  float  $value
+     * @return array
+     */
+    public function create(string $payer, string $payee, float $value): array
+    {
+        return Transactions::create(
+            [
+                'payer_id' => $payer,
+                'payee_id' => $payee,
+                'value' => $value
+            ]
+        )->toArray();
     }
 }

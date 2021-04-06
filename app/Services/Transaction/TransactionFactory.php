@@ -9,9 +9,8 @@ namespace App\Services\Transaction;
 use App\Repositories\TransactionRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\WalletRepositoryInterface;
+use App\Services\Authorization\AuthorizationServiceInterface;
 use Exception;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Arr;
 
 /**
  * Class TransactionFactory
@@ -33,22 +32,29 @@ class TransactionFactory
      * @var UserRepositoryInterface
      */
     private $userRepository;
+    /**
+     * @var AuthorizationServiceInterface
+     */
+    private $authorizationService;
 
     /**
      * TransactionFactory constructor.
      *
      * @param  TransactionRepositoryInterface  $transactionRepository
-     * @param  WalletRepositoryInterface  $walletRespository
+     * @param  WalletRepositoryInterface  $walletRepository
      * @param  UserRepositoryInterface  $userRepository
+     * @param  AuthorizationServiceInterface  $authorizationService
      */
     public function __construct(
         TransactionRepositoryInterface $transactionRepository,
-        WalletRepositoryInterface $walletRespository,
-        UserRepositoryInterface $userRepository
+        WalletRepositoryInterface $walletRepository,
+        UserRepositoryInterface $userRepository,
+        AuthorizationServiceInterface $authorizationService
     ) {
         $this->transactionRepository = $transactionRepository;
-        $this->walletRepository = $walletRespository;
+        $this->walletRepository = $walletRepository;
         $this->userRepository = $userRepository;
+        $this->authorizationService = $authorizationService;
     }
 
     /**
@@ -60,7 +66,12 @@ class TransactionFactory
     {
         switch ($class) {
             case Send::class:
-                return new Send($this->transactionRepository, $this->walletRepository, $this->userRepository);
+                return new Send(
+                    $this->transactionRepository,
+                    $this->walletRepository,
+                    $this->userRepository,
+                    $this->authorizationService
+                );
                 break;
             default:
                 throw new Exception('Method not found');

@@ -31,8 +31,8 @@ class TransactionSendRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'payer_id' => 'required',
-            'payee_id' => 'required',
+            'payer_id' => 'required|exists:users,id',
+            'payee_id' => 'required|exists:users,id',
             'value' => 'required|numeric|min:0.1',
         ];
     }

@@ -9,6 +9,7 @@ use App\Http\Requests\TransactionSendRequest;
 use App\Services\Transaction\Send;
 use App\Services\Transaction\TransactionFactory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 /**
@@ -28,24 +29,20 @@ class TransactionsController extends Controller
         $this->transactionFactory = $transactionFactory;
     }
 
-    public function index()
-    {
-        return [
-            'a' => 'a'
-        ];
-    }
-
     /**
      * @param  TransactionSendRequest  $request
      * @return JsonResponse|void
      */
     public function receiveTransaction(TransactionSendRequest $request): JsonResponse
     {
+        DB::beginTransaction();
         try {
             $sendService = $this->transactionFactory->instance(Send::class);
             $response = $sendService->handle($request->all());
+            DB::commit();
             return response()->json($response);
         } catch (TransactionException $exception) {
+            DB::commit();
             return response()
                 ->json(
                     [
@@ -55,11 +52,12 @@ class TransactionsController extends Controller
                     $exception->getCode()
                 );
         } catch (Throwable $exception) {
+            DB::rollBack();
             return response()->json(
                 [
                     'message' => 'transaction failed, try again',
                 ],
-                $exception->getCode()
+                500
             );
         }
     }

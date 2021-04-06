@@ -22,7 +22,7 @@ class WalletSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)
+        User::factory(5)
             ->has(
                 Wallet::factory()
                     ->count(3)

@@ -18,4 +18,11 @@ interface WalletRepositoryInterface
      * @return float
      */
     public function getBalance(string $userId): float;
+
+    /**
+     * @param  string  $userId
+     * @param  float  $amount
+     * @return array
+     */
+    public function insert(string $userId, float $amount): array;
 }

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Repositories;
 
 
@@ -22,5 +21,20 @@ class WalletRepository implements WalletRepositoryInterface
     public function getBalance(string $userId): float
     {
         return Wallet::where('user_id', '=', $userId)->sum('amount');
+    }
+
+    /**
+     * @param  string  $userId
+     * @param  float  $amount
+     * @return array
+     */
+    public function insert(string $userId, float $amount): array
+    {
+        return Wallet::create(
+            [
+                'amount' => $amount,
+                'user_id' => $userId
+            ]
+        )->toArray();
     }
 }
