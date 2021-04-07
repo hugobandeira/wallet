@@ -5,7 +5,7 @@
 Environment
 
 ```bash
-cp .env.exemple .env
+cp .env.example .env
 ```
 
 Construir projeto
