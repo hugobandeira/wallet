@@ -5,8 +5,8 @@ build:
 
 up:
 #	date && pwd && whoami && git pull origin master
-# 	docker exec wallet-app composer install
 	userid=${USERID} docker-compose up -d
+	docker exec wallet-app composer install
 
 test:
 	docker exec wallet-app php artisan optimize:clear --env=testing
