@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Traits\Uuid;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use Uuid;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -31,6 +32,7 @@ class User extends Authenticatable
         'email',
         'cpf/cnpj',
         'password',
+        'type_person',
     ];
 
     /**
@@ -52,4 +54,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'id' => 'string'
     ];
+
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * @return HasMany
+     */
+    public function sendTransactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class, 'payer_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function receiveTransactions(): HasMany
+    {
+        return $this->hasMany(Transactions::class, 'payee_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function wallet(): HasMany
+    {
+        return $this->hasMany(Wallet::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return float
+     */
+    public function getBalanceAttribute(): float
+    {
+        return $this->wallet()->sum('amount');
+    }
 }
