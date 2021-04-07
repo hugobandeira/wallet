@@ -33,4 +33,6 @@ make install-hooks
 
 Documentação Postman do projeto
 
-- [Postman Collection](https://github.com/hugobandeira/wallet/Wallet.postman_collection.json)
+- [Postman Collection](https://github.com/hugobandeira/wallet/blob/master/Wallet.postman_collection.json)
+
+![alt text](https://github.com/hugobandeira/wallet/blob/master/img.png)
