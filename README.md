@@ -3,6 +3,7 @@
 ### Etapas para configuração do projeto
 
 Environment
+
 ```bash
 cp .env.exemple .env
 ```
@@ -23,6 +24,12 @@ Executar os testes unitários/integração gerando cobertura de código `/covera
 
 ```bash
 make test
+```
+
+Executar migrations e seeds
+
+```bash
+make seed
 ```
 
 Instalar hooks pre-push

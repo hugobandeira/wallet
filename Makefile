@@ -23,6 +23,9 @@ deploy:
 stop:
 	docker-compose stop
 
+seed:
+	docker exec wallet-app php artisan migrate --seed
+
 install-hooks:
 	@for f in githooks/* ; do \
   		file=`echo $$f | cut -d "/" -f2` ; \
